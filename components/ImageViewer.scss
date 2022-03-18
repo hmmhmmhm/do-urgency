@@ -1,0 +1,8 @@
+.imageViewer {
+  @apply w-full h-full flex justify-center items-center;
+  @apply select-none overflow-hidden;
+  background-color: #22272e;
+  img {
+    cursor: grab;
+  }
+}

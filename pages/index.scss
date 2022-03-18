@@ -1,0 +1,12 @@
+html,
+body,
+#__next {
+  @apply w-full m-0 p-0;
+}
+
+.indexPage {
+  @apply bg-cover bg-center p-6;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ebf1f5;
+}

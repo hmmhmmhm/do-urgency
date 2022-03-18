@@ -33,7 +33,8 @@
     "typeRoots": [
       "node_modules/@types",
       "./typings"
-    ]
+    ],
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",

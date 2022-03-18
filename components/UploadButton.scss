@@ -1,11 +1,13 @@
 .uploadButton {
   @apply relative flex flex-col border border-dashed rounded-sm;
   @apply w-full h-full outline-none select-none;
+  @apply justify-center items-center;
   color: #999999;
   border-color: #999999;
 
   &__icon {
-    @apply w-12 h-12;
+    @apply relative w-12 h-12 top-0;
+    @apply animate-bounce;
   }
 
   &__text {

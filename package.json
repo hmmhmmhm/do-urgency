@@ -19,6 +19,8 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.0",
     "@fortawesome/free-solid-svg-icons": "^6.1.0",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@react-spring/web": "^9.4.4",
+    "@use-gesture/react": "^10.2.10",
     "classnames": "^2.3.1",
     "next": "12.1.0",
     "react": "17.0.2",

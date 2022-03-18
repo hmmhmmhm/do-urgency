@@ -1,7 +1,7 @@
 import { demo } from 'frontbook-react'
 
 export default demo({
-  w: 8,
+  w: 6,
   h: 12,
   controls: {
     className: {
