@@ -1,0 +1,118 @@
+{
+  "Next Page": {
+    "scope": "typescriptreact",
+    "prefix": [
+      "page",
+      "next-page",
+      "np"
+    ],
+    "body": [
+      "import { ServicePageContext } from 'interfaces/service'",
+      "",
+      "const ${1:Page} = () => {",
+      "  \/\/ * 페이지 로직",
+      "  return <></>",
+      "}",
+      "",
+      "${1:Page}.getInitialProps = async (context: ServicePageContext) => {",
+      "  \/\/ * 사전 데이터 패치 로직이 담깁니다.",
+      "  const {} = context.store",
+      "  return { query: context.query }",
+      "}",
+      "",
+      "export default ${1:Page}",
+      ""
+    ],
+    "description": "넥스트 페이지를 생성합니다."
+  },
+  "Next Page getInitialProps": {
+    "scope": "typescriptreact",
+    "prefix": [
+      "getInitialProps"
+    ],
+    "body": [
+      "${1:Page}.getInitialProps = async (context: ${2:ServicePageContext}) => {",
+      "  \/\/ * 사전 데이터 패치 로직이 담깁니다.",
+      "  const {} = context.store",
+      "  return { query: context.query }",
+      "}"
+    ],
+    "description": "넥스트 페이지를 생성합니다."
+  },
+  "Next JSX Style": {
+    "scope": "typescriptreact",
+    "prefix": [
+      "next jsx style"
+    ],
+    "body": [
+      "<style jsx>{style}</style>"
+    ],
+    "description": "넥스트 JSX 스타일을 등록합니다."
+  },
+  "Next JSX Service": {
+    "scope": "typescript",
+    "prefix": [
+      "service",
+      "next service store"
+    ],
+    "body": [
+      "import { SubService } from 'stores/service/utils'",
+      "",
+      "class ${1:ServiceName} extends SubService {",
+      "  \/\/ *",
+      "}",
+      "",
+      "export default ${1:ServiceName}",
+      ""
+    ],
+    "description": "백엔드 API 서비스 클래스를 생성합니다."
+  },
+  "Next Mobx Store": {
+    "scope": "typescript",
+    "prefix": [
+      "store class",
+      "next mobx store"
+    ],
+    "body": [
+      "import { ServiceStore } from 'interfaces/service'",
+      "",
+      "export class ${1:StoreName} {",
+      "  protected store!: ServiceStore",
+      "  \/\/ *",
+      "}",
+      ""
+    ],
+    "description": "Mobx 스토어 클래스를 생성합니다."
+  },
+  "Next Component": {
+    "scope": "typescriptreact",
+    "prefix": [
+      "component",
+      "next-component",
+      "nc"
+    ],
+    "body": [
+      "import classNames from 'classnames'",
+      "import style from './${1:Component}.scss'",
+      "",
+      "export interface I${1:Component}Props {",
+      "  className?: string",
+      "}",
+      "",
+      "const ${1:Component} = (props: I${1:Component}Props) => {",
+      "  return (",
+      "    <>",
+      "      <div className={classNames('${1:Component}', props.className)}>",
+      "        {/* TODO */}",
+      "      </div>",
+      "      <style jsx>{style}</style>",
+      "    </>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:Component}",
+      ""
+    ],
+    "description": "넥스트 컴포넌트를 생성합니다."
+  }
+}

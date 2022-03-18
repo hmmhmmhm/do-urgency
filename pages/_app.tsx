@@ -1,5 +1,5 @@
-import type { AppProps } from "next/app";
-import tailwindStyle from "./_app.scss";
+import type { AppProps } from 'next/app'
+import tailwindStyle from './_app.scss'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -10,7 +10,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
       <Component {...pageProps} />
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App

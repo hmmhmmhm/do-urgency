@@ -15,6 +15,11 @@
     "prestart": "npx prestart"
   },
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.1.0",
+    "@fortawesome/free-regular-svg-icons": "^6.1.0",
+    "@fortawesome/free-solid-svg-icons": "^6.1.0",
+    "@fortawesome/react-fontawesome": "^0.1.18",
+    "classnames": "^2.3.1",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2"
@@ -24,6 +29,8 @@
     "css-loader": "^6.0.0",
     "eslint": "8.0.1",
     "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "file-loader": "^6.2.0",
     "frontbook-react": "^1.1.32",
     "node-sass": "^6.0.1",
@@ -32,6 +39,7 @@
     "postcss-loader": "^6.1.1",
     "postcss-nested": "^5.0.5",
     "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.6.0",
     "sass-loader": "^12.1.0",
     "styled-jsx": "^4.0.1",
     "tailwindcss": "^2.2.7",
