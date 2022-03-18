@@ -1,7 +1,8 @@
 {
-  "name": "frontbook-nextjs-example",
+  "name": "do-urgency",
   "version": "1.0.0",
   "browser": "true",
+  "private": true,
   "scripts": {
     "dev": "npx prestart && next dev",
     "build": "next build",
