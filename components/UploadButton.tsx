@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 import style from './UploadButton.scss'
+import { faFileArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export interface IUploadButtonProps {
   className?: string
