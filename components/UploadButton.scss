@@ -1,3 +1,14 @@
 .uploadButton {
-  @apply relative;
+  @apply relative flex flex-col border border-dashed rounded-sm;
+  @apply w-full h-full outline-none select-none;
+  color: #999999;
+  border-color: #999999;
+
+  &__icon {
+    @apply w-12 h-12;
+  }
+
+  &__text {
+    @apply mt-3 text-base font-medium;
+  }
 }
