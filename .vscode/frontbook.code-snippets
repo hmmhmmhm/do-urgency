@@ -1,0 +1,25 @@
+{
+  "Create Frontbook Demo": {
+    "scope": "typescriptreact",
+    "prefix": [
+      "create-frontbook-demo",
+      "cfd",
+      "frontbook-demo"
+    ],
+    "body": [
+      "import { demo } from 'frontbook-react'",
+      "",
+      "export default demo({",
+      "  controls: {",
+      "    \/\/ TODO: Add controls",
+      "  },",
+      "  renderProps: (props) => {",
+      "    \/\/  TODO: Add renderProps",
+      "    return { ...props }",
+      "  }",
+      "})",
+      ""
+    ],
+    "description": "Create a demo of the frontbook."
+  }
+}

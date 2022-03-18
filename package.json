@@ -1,0 +1,40 @@
+{
+  "name": "frontbook-nextjs-example",
+  "version": "1.0.0",
+  "browser": "true",
+  "scripts": {
+    "dev": "npx prestart && next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export",
+    "lint": "next lint",
+    "frontbook-dev": "frontbook-react dev",
+    "frontbook-export": "npx prestart && frontbook-react export",
+    "frontbook-watch": "npx prestart && frontbook-react watch",
+    "prestart": "npx prestart"
+  },
+  "dependencies": {
+    "next": "11.1.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.30",
+    "css-loader": "^6.0.0",
+    "eslint": "8.0.1",
+    "eslint-config-next": "11.1.2",
+    "file-loader": "^6.2.0",
+    "frontbook-react": "^1.1.32",
+    "node-sass": "^6.0.1",
+    "postcss": "^8.3.9",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-loader": "^6.1.1",
+    "postcss-nested": "^5.0.5",
+    "postcss-preset-env": "^6.7.0",
+    "sass-loader": "^12.1.0",
+    "styled-jsx": "^4.0.1",
+    "tailwindcss": "^2.2.7",
+    "typescript": "4.4.4",
+    "url-loader": "^4.1.1"
+  }
+}
