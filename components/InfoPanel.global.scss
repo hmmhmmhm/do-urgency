@@ -1,0 +1,74 @@
+.pane {
+  @apply w-full;
+  @apply m-auto left-0 right-0 rounded-xl;
+  @apply bg-transparent pt-0 #{!important};
+
+  .close-button {
+    @apply bg-white bg-opacity-70;
+  }
+  .destroy-button {
+    @apply cursor-pointer;
+  }
+}
+
+.infoPanel {
+  @apply w-full h-full relative select-none overflow-hidden;
+  @apply top-0 left-0 block m-0 text-center bg-transparent;
+  @apply rounded-xl;
+
+  .picture {
+    @apply w-full bg-cover bg-center h-48;
+    background-image: url('https://i.imgur.com/FT8r0pM.png');
+  }
+
+  .content {
+    @apply h-44 bg-white bg-opacity-70 saturate-200 blur-xl;
+
+    .info {
+      @apply flex items-center justify-between h-24;
+    }
+    h1 {
+      @apply mt-0 text-xl mb-0 text-left;
+    }
+    p {
+      @apply text-xs m-0 mt-1;
+    }
+    .left-side {
+      @apply text-left ml-5;
+    }
+    .right-side {
+      @apply mr-5;
+    }
+  }
+
+  .description {
+    @apply mx-5 flex justify-between items-center;
+    @apply h-16 border-t border-t-gray-400 cursor-pointer;
+
+    .powered {
+      @apply flex items-center;
+
+      .icon {
+        @apply mr-3;
+        img {
+          @apply block w-7 rounded-md;
+        }
+      }
+      .by {
+        @apply text-xs text-gray-500;
+      }
+
+      .name {
+        @apply relative text-sm;
+      }
+    }
+
+    .title {
+      @apply text-left;
+    }
+    .store {
+      @apply text-xs flex items-center justify-between;
+      @apply text-gray-500 w-16;
+    }
+  }
+}

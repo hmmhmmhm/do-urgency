@@ -2,15 +2,10 @@ import { demo } from 'frontbook-react'
 
 export default demo({
   controls: {
-    iconType: {
-      type: 'select',
-      defaultValue: {
-        defaultValue: 'info',
-        selectableValues: ['info', 'download', 'close']
-      }
-    }
+    // TODO: Add controls
   },
   renderProps: (props) => {
+    //  TODO: Add renderProps
     return { ...props }
   }
 })

@@ -1,41 +1,28 @@
-import classNames from 'classnames'
-import { ButtonHTMLAttributes } from 'react'
-import style from './InfoButton.scss'
-import {
-  faQuestion,
-  faCloudDownload,
-  faClose
-} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ButtonHTMLAttributes, useState } from 'react'
+import InfoPanel from './InfoPanel'
+import ServiceButton from './ServiceButton'
 
-export interface IInfoButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
-  className?: string
-  iconType?: 'info' | 'download' | 'close'
-}
+const InfoButton = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
+  const { onClick, ...rest } = props
+  const [isPanelOpen, setIsPanelOpen] = useState(false)
 
-const InfoButton = (props: IInfoButtonProps) => {
-  const { className, iconType } = props
   return (
     <>
-      <button
-        className={classNames('infoButton', className, iconType)}
-        title={`${iconType} button`}
-      >
-        {iconType === 'info' && (
-          <FontAwesomeIcon icon={faQuestion} className="infoButton__icon" />
+      <ServiceButton
+        iconType="info"
+        onClick={(event) => {
+          setIsPanelOpen(true)
+          onClick && onClick(event)
+        }}
+        {...rest}
+      />
+      <div>
+        {isPanelOpen && (
+          <div>
+            <InfoPanel onDidDismiss={() => setIsPanelOpen(false)} />
+          </div>
         )}
-        {iconType === 'download' && (
-          <FontAwesomeIcon
-            icon={faCloudDownload}
-            className="infoButton__icon"
-          />
-        )}
-        {iconType === 'close' && (
-          <FontAwesomeIcon icon={faClose} className="infoButton__icon" />
-        )}
-      </button>
-      <style jsx>{style}</style>
+      </div>
     </>
   )
 }
