@@ -3,6 +3,7 @@ import PrefetchLink from 'components/next/PrefetchLink'
 import RadialBlurImageEdit from 'components/RadialBlurImageEdit'
 import UploadButton from 'components/UploadButton'
 import type { NextPage } from 'next'
+import { NextSeo } from 'next-seo'
 import { useEffect, useState } from 'react'
 import { createFileInput } from 'utils/virtualFileInput'
 import style from './index.scss'
@@ -32,6 +33,22 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <NextSeo
+        title="긴박한 이미지 생성기"
+        description="이미지를 첨부하면 해당 이미지를 순식간에 긴박하게 만들어드립니다."
+        openGraph={{
+          type: 'website',
+          locale: 'ko_KR',
+          site_name:
+            '긴박한 이미지 생성기, 이미지를 순식 간에 긴박하게 만들어줍니다'
+        }}
+        additionalLinkTags={[
+          {
+            rel: 'icon',
+            href: '/favicon.ico'
+          }
+        ]}
+      />
       <main className="indexPage">
         <UploadButton
           label="업로드 할 이미지를<br>선택해주세요."
