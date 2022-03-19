@@ -13,4 +13,8 @@ body,
   &__infoButton {
     @apply absolute m-5 bottom-10 right-10 z-10;
   }
+
+  &__edit {
+    @apply absolute z-20 top-0 left-0 w-full h-full;
+  }
 }

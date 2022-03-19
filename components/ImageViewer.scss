@@ -1,8 +1,14 @@
 .imageViewer {
   @apply w-full h-full flex justify-center items-center;
-  @apply select-none overflow-hidden;
+  @apply select-none overflow-hidden rounded-sm;
   background-color: #22272e;
   img {
     cursor: grab;
+  }
+  &__download {
+    @apply absolute right-28 top-20;
+  }
+  &__close {
+    @apply absolute right-10 top-20;
   }
 }

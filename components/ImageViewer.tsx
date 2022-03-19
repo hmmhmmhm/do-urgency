@@ -2,17 +2,21 @@ import classNames from 'classnames'
 import style from './ImageViewer.scss'
 import { useSpring, animated, AnimatedComponent } from '@react-spring/web'
 import { createUseGesture, dragAction, pinchAction } from '@use-gesture/react'
-import { useEffect, useRef } from 'react'
+import { HTMLAttributes, ReactNode, useEffect, useRef } from 'react'
+import ServiceButton from './ServiceButton'
 
 const useGesture = createUseGesture([dragAction, pinchAction])
 
-export interface IImageViewerProps {
+export interface IImageViewerProps extends HTMLAttributes<HTMLDivElement> {
   className?: string
   imageUrl?: string
+  onClose?: () => unknown
+  onDownload?: () => unknown
+  children?: ReactNode
 }
 
 const ImageViewer = (props: IImageViewerProps) => {
-  const { imageUrl } = props
+  const { className, imageUrl, onClose, onDownload, children, ...rest } = props
 
   useEffect(() => {
     const handler = (e: Event) => e.preventDefault()
@@ -37,7 +41,7 @@ const ImageViewer = (props: IImageViewerProps) => {
 
   useGesture(
     {
-      onDrag: ({ pinching, cancel, offset: [x, y], ...rest }) => {
+      onDrag: ({ pinching, cancel, offset: [x, y] }) => {
         if (pinching) return cancel()
         api.start({ x, y })
       },
@@ -64,20 +68,35 @@ const ImageViewer = (props: IImageViewerProps) => {
     {
       target: ref,
       drag: { from: () => [springStyle.x.get(), springStyle.y.get()] },
-      pinch: { scaleBounds: { min: 0.5, max: 2 }, rubberband: true }
+      pinch: { scaleBounds: { min: 0.05, max: 2 }, rubberband: true }
     }
   )
 
   return (
     <>
-      <div className={classNames('imageViewer', props.className)}>
+      <div className={classNames('imageViewer', className)} {...rest}>
         <animated.div ref={ref} style={springStyle}>
-          <img
-            src={imageUrl}
-            alt="rendered image"
-            onDragStart={(event) => event.preventDefault()}
-          />
+          {!children && imageUrl && (
+            <img
+              src={imageUrl}
+              alt="rendered image"
+              onDragStart={(event) => event.preventDefault()}
+            />
+          )}
+
+          {children && children}
         </animated.div>
+
+        <ServiceButton
+          className="imageViewer__download"
+          iconType="download"
+          onClick={onDownload}
+        />
+        <ServiceButton
+          className="imageViewer__close"
+          iconType="close"
+          onClick={onClose}
+        />
       </div>
 
       <style jsx>{style}</style>

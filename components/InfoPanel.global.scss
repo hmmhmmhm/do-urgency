@@ -22,7 +22,7 @@
   }
 
   .content {
-    @apply h-44 bg-white bg-opacity-70 saturate-200 blur-xl;
+    @apply h-44 bg-white bg-opacity-70 saturate-200;
 
     .info {
       @apply flex items-center justify-between h-24;

@@ -1,0 +1,21 @@
+.radialBlurImageEdit {
+  @apply w-full h-full;
+
+  canvas {
+    @apply select-none;
+    cursor: grab;
+  }
+
+  &__tip {
+    @apply absolute text-white py-1 px-2 text-xs;
+    @apply rounded-md opacity-80;
+    background-color: #999999;
+    &.tip1 {
+      @apply left-10 bottom-10;
+    }
+    &.tip2 {
+      @apply left-10;
+      bottom: 4.375rem;
+    }
+  }
+}
