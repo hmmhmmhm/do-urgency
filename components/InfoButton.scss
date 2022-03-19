@@ -1,0 +1,10 @@
+.infoButton {
+  @apply w-12 h-12 rounded-full text-white;
+  @apply flex justify-center items-center animate-pulse;
+
+  background-color: #999999;
+
+  &__icon {
+    @apply w-6 h-6;
+  }
+}
