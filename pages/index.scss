@@ -9,4 +9,8 @@ body,
   width: 100vw;
   height: 100vh;
   background-color: #ebf1f5;
+
+  &__infoButton {
+    @apply absolute m-5 bottom-10 right-10 z-10;
+  }
 }

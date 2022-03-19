@@ -19,7 +19,7 @@ const InfoButton = (props: IInfoButtonProps) => {
   return (
     <>
       <button
-        className={classNames('infoButton', className)}
+        className={classNames('infoButton', className, iconType)}
         title={`${iconType} button`}
       >
         {iconType === 'info' && (
