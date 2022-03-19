@@ -2,12 +2,9 @@ import InfoButton from 'components/InfoButton'
 import PrefetchLink from 'components/next/PrefetchLink'
 import UploadButton from 'components/UploadButton'
 import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
 import style from './index.scss'
 
 const Home: NextPage = () => {
-  const router = useRouter()
-
   return (
     <>
       <main className="indexPage">
