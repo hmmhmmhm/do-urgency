@@ -19,6 +19,8 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
     typeof filter
   > | null>(null)
 
+  const [offset, setOffset] = useState({ x: 0, y: 0, zoom: 1 })
+
   useEffect(() => {
     const radialBlurFilter = filter({
       url: imageUrl,
@@ -31,11 +33,12 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
 
   const changeCenter = (event: MouseEvent) => {
     if (!filterInstance) return
-    const c = filterInstance.canvas
-    const z = (window.getComputedStyle(c) as any).zoom
-    const d = document.documentElement
-    const x = (event.clientX + d.scrollLeft - c.offsetLeft * z) / c.width / z
-    const y = (event.clientY + d.scrollTop - c.offsetTop * z) / c.height / z
+    const canvas = filterInstance.canvas
+    const bounds = canvas.getBoundingClientRect()
+    const actualX = event.pageX - bounds.left
+    const actualY = event.pageY - bounds.top
+    const x = actualX / (canvas.width * offset.zoom)
+    const y = actualY / (canvas.height * offset.zoom)
     filterInstance.uniform('2f', 'mouse', x, y).apply()
   }
 
@@ -45,9 +48,19 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
         <ImageViewer
           onClose={onClose}
           onDownload={onDownload}
-          onClick={(event) => changeCenter(event)}
+          onClick={(event) => {
+            event.stopPropagation()
+            changeCenter(event)
+          }}
+          onChangePosition={({ x, y, zoom }) => setOffset({ x, y, zoom })}
         >
-          <canvas ref={canvasRef} onClick={(event) => changeCenter(event)} />
+          <canvas
+            ref={canvasRef}
+            onClick={(event) => {
+              event.stopPropagation()
+              changeCenter(event)
+            }}
+          />
         </ImageViewer>
 
         <div className="radialBlurImageEdit__tip tip1">

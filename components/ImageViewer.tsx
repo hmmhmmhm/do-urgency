@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import style from './ImageViewer.scss'
 import { useSpring, animated, AnimatedComponent } from '@react-spring/web'
 import { createUseGesture, dragAction, pinchAction } from '@use-gesture/react'
-import { HTMLAttributes, ReactNode, useEffect, useRef } from 'react'
+import { HTMLAttributes, ReactNode, useEffect, useRef, useState } from 'react'
 import ServiceButton from './ServiceButton'
 
 const useGesture = createUseGesture([dragAction, pinchAction])
@@ -12,11 +12,22 @@ export interface IImageViewerProps extends HTMLAttributes<HTMLDivElement> {
   imageUrl?: string
   onClose?: () => unknown
   onDownload?: () => unknown
+  onChangePosition?: (props: { x: number; y: number; zoom: number }) => unknown
   children?: ReactNode
 }
 
 const ImageViewer = (props: IImageViewerProps) => {
-  const { className, imageUrl, onClose, onDownload, children, ...rest } = props
+  const {
+    className,
+    imageUrl,
+    onClose,
+    onDownload,
+    children,
+    onChangePosition,
+    ...rest
+  } = props
+  const [offset, setOffset] = useState({ x: 0, y: 0 })
+  const [offsetZoom, setOffsetZoom] = useState(1)
 
   useEffect(() => {
     const handler = (e: Event) => e.preventDefault()
@@ -39,11 +50,21 @@ const ImageViewer = (props: IImageViewerProps) => {
 
   const ref = useRef<AnimatedComponent<'div'> & HTMLDivElement>(null)
 
+  useEffect(() => {
+    if (!onChangePosition) return
+    onChangePosition({
+      x: offset.x,
+      y: offset.y,
+      zoom: offsetZoom
+    })
+  }, [offset, offsetZoom])
+
   useGesture(
     {
       onDrag: ({ pinching, cancel, offset: [x, y] }) => {
         if (pinching) return cancel()
         api.start({ x, y })
+        setOffset({ x, y })
       },
       onPinch: ({
         origin: [ox, oy],
@@ -62,6 +83,8 @@ const ImageViewer = (props: IImageViewerProps) => {
         const x = memo[0] - (ms - 1) * memo[2]
         const y = memo[1] - (ms - 1) * memo[3]
         api.start({ scale: s, rotateZ: a, x, y })
+        setOffset({ x, y })
+        setOffsetZoom(s)
         return memo
       }
     },
