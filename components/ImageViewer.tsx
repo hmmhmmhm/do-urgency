@@ -113,12 +113,18 @@ const ImageViewer = (props: IImageViewerProps) => {
         <ServiceButton
           className="imageViewer__download"
           iconType="download"
-          onClick={onDownload}
+          onClick={(event) => {
+            event.stopPropagation()
+            if (onDownload) onDownload()
+          }}
         />
         <ServiceButton
           className="imageViewer__close"
           iconType="close"
-          onClick={onClose}
+          onClick={(event) => {
+            event.stopPropagation()
+            if (onClose) onClose()
+          }}
         />
       </div>
 

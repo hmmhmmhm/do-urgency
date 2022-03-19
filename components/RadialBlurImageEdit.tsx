@@ -9,7 +9,7 @@ export interface IRadialBlurImageEditProps
   className?: string
   imageUrl: string
   onClose?: () => unknown
-  onDownload?: () => unknown
+  onDownload?: (canvas: HTMLCanvasElement) => unknown
 }
 
 type FilterLevel = 1 | 2 | 3
@@ -56,7 +56,7 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
       <div className={classNames('radialBlurImageEdit', className)} {...rest}>
         <ImageViewer
           onClose={onClose}
-          onDownload={onDownload}
+          onDownload={() => onDownload && onDownload(canvasRef.current!)}
           onClick={(event) => {
             event.stopPropagation()
             changeCenter(event)

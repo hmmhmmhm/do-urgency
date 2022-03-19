@@ -10,8 +10,10 @@ export const filter = (props: {
   const { fragCode, url, canvasElement } = props
 
   const canvas = canvasElement ?? document.createElement('canvas')
-  const gl = (canvas.getContext('webgl') ||
-    canvas.getContext('experimental-webgl')) as WebGLRenderingContext
+  const gl = (canvas.getContext('webgl', { preserveDrawingBuffer: true }) ||
+    canvas.getContext('experimental-webgl', {
+      preserveDrawingBuffer: true
+    })) as WebGLRenderingContext
 
   let pid: WebGLProgram | null = null
 

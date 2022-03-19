@@ -5,6 +5,7 @@ import UploadButton from 'components/UploadButton'
 import type { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
 import { useEffect, useState } from 'react'
+import JsFileDownloader from 'js-file-downloader'
 import { createFileInput } from 'utils/virtualFileInput'
 import style from './index.scss'
 
@@ -62,8 +63,11 @@ const Home: NextPage = () => {
           <RadialBlurImageEdit
             className="indexPage__edit"
             imageUrl={imageUrl}
-            onDownload={() => {
-              //
+            onDownload={(canvasElement) => {
+              new JsFileDownloader({
+                url: canvasElement.toDataURL(),
+                filename: 'image.png'
+              })
             }}
             onClose={() => {
               setImageUrl(null)
