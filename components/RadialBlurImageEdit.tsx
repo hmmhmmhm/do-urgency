@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { HTMLAttributes, MouseEvent, useEffect, useRef, useState } from 'react'
-import { filter, fragmentShaderCode } from 'utils/radialBlurFilter'
+import { filter, getFragmentShaderCode } from 'utils/radialBlurFilter'
 import ImageViewer from './ImageViewer'
 import style from './RadialBlurImageEdit.scss'
 
@@ -12,8 +12,11 @@ export interface IRadialBlurImageEditProps
   onDownload?: () => unknown
 }
 
+type FilterLevel = 1 | 2 | 3
+
 const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
   const { className, imageUrl, onClose, onDownload, ...rest } = props
+  const [filterLevel, setFilterLevel] = useState(3 as FilterLevel)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [filterInstance, setFilterInstance] = useState<ReturnType<
     typeof filter
@@ -22,14 +25,20 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
   const [offset, setOffset] = useState({ x: 0, y: 0, zoom: 1 })
 
   useEffect(() => {
+    let samples = 66
+    if (filterLevel === 1) {
+      samples = 22
+    } else if (filterLevel === 2) {
+      samples = 33
+    }
     const radialBlurFilter = filter({
       url: imageUrl,
       canvasElement: canvasRef.current!,
-      fragCode: fragmentShaderCode
+      fragCode: getFragmentShaderCode({ samples })
     })
 
     setFilterInstance(radialBlurFilter)
-  }, [])
+  }, [filterLevel])
 
   const changeCenter = (event: MouseEvent) => {
     if (!filterInstance) return
@@ -69,6 +78,17 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
         <div className="radialBlurImageEdit__tip tip2">
           <p>사진을 드래그해서 옮기고 확대할 수 있습니다.</p>
         </div>
+        <button
+          className="radialBlurImageEdit__changeFlterLevel"
+          onClick={() => {
+            filterLevel === 3
+              ? setFilterLevel(1)
+              : setFilterLevel((filterLevel + 1) as FilterLevel)
+          }}
+        >
+          필터 세기:{' '}
+          {filterLevel === 3 ? '강' : filterLevel === 2 ? '중' : '약'}
+        </button>
       </div>
       <style jsx>{style}</style>
     </>

@@ -18,4 +18,9 @@
       bottom: 4.375rem;
     }
   }
+  &__changeFlterLevel {
+    @apply absolute text-white py-1 px-2 text-base;
+    @apply rounded-md opacity-80 top-20 left-10;
+    background-color: #999999;
+  }
 }

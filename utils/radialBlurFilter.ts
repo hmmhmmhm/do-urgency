@@ -129,33 +129,35 @@ export const filter = (props: {
   return filter
 }
 
-export const fragmentShaderCode = `
+export const getFragmentShaderCode = (options?: { samples?: number }) => {
+  return `
 
-const int samples = 66;
-uniform float power;
-uniform vec2 mouse;
-
-mat2 rotate2d (float angle) {
-  vec2 sc = vec2( sin(angle), cos(angle) );
-  return mat2( sc.y, -sc.x, sc.xy );
+  const int samples = ${options?.samples ?? 66};
+  uniform float power;
+  uniform vec2 mouse;
+  
+  mat2 rotate2d (float angle) {
+    vec2 sc = vec2( sin(angle), cos(angle) );
+    return mat2( sc.y, -sc.x, sc.xy );
+  }
+  
+  vec4 frag (vec2 uv) {
+  
+    float rotateDir = sin(length(uv - mouse)*1./(0.005 + power*5.));
+    rotateDir = smoothstep(-.3, .3, rotateDir)-.5;
+  
+    vec2 shiftDir = (uv-mouse)*vec2(-1.0,-1.0);
+  
+    vec4 color = vec4(0.);
+    for (int i = 0; i < samples; i ++) {
+      uv += float(i)/float(samples)*shiftDir*0.01;
+      uv -= mouse;      
+      uv *= rotate2d( rotateDir * power * float(i)); 
+      uv += mouse;
+      color += sample(uv)/float(samples+i);
+    } 
+    return color*1.5;
+  }
+  
+  `
 }
-
-vec4 frag (vec2 uv) {
-
-  float rotateDir = sin(length(uv - mouse)*1./(0.005 + power*5.));
-  rotateDir = smoothstep(-.3, .3, rotateDir)-.5;
-
-  vec2 shiftDir = (uv-mouse)*vec2(-1.0,-1.0);
-
-  vec4 color = vec4(0.);
-  for (int i = 0; i < samples; i ++) {
-    uv += float(i)/float(samples)*shiftDir*0.01;
-    uv -= mouse;      
-    uv *= rotate2d( rotateDir * power * float(i)); 
-    uv += mouse;
-    color += sample(uv)/float(samples+i);
-  } 
-  return color*1.5;
-}
-
-`
