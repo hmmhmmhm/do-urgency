@@ -41,7 +41,17 @@ const Home: NextPage = () => {
           type: 'website',
           locale: 'ko_KR',
           site_name:
-            '긴박한 이미지 생성기, 이미지를 순식 간에 긴박하게 만들어줍니다'
+            '긴박한 이미지 생성기, 이미지를 순식 간에 긴박하게 만들어줍니다',
+          images: [
+            {
+              url: `https://i.imgur.com/tm4X9ls.png`,
+
+              width: 1200,
+              height: 630,
+              alt: '긴박한 이미지 생성기, 이미지를 순식 간에 긴박하게 만들어줍니다',
+              type: 'image/png'
+            }
+          ]
         }}
         additionalLinkTags={[
           {
