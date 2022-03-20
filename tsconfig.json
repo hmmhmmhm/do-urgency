@@ -16,6 +16,9 @@
       "dom.iterable",
       "esnext"
     ],
+    "types": [
+      "@types/gtag.js"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
