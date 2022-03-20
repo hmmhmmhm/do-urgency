@@ -12,7 +12,7 @@ export interface IRadialBlurImageEditProps
   onDownload?: (canvas: HTMLCanvasElement) => unknown
 }
 
-type FilterLevel = 1 | 2 | 3
+type FilterLevel = 1 | 2 | 3 | 4
 
 const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
   const { className, imageUrl, onClose, onDownload, ...rest } = props
@@ -28,8 +28,10 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
   useEffect(() => {
     let samples = 66
     if (filterLevel === 1) {
-      samples = 22
+      samples = 11
     } else if (filterLevel === 2) {
+      samples = 22
+    } else if (filterLevel === 3) {
       samples = 33
     }
     const radialBlurFilter = filter({
@@ -103,13 +105,19 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
         <button
           className="radialBlurImageEdit__changeFlterLevel"
           onClick={() => {
-            filterLevel === 3
+            filterLevel === 4
               ? setFilterLevel(1)
               : setFilterLevel((filterLevel + 1) as FilterLevel)
           }}
         >
           필터 세기:{' '}
-          {filterLevel === 3 ? '강' : filterLevel === 2 ? '중' : '약'}
+          {filterLevel === 4
+            ? '강'
+            : filterLevel === 3
+            ? '중'
+            : filterLevel === 2
+            ? '약'
+            : '초미세'}
         </button>
       </div>
       <style jsx>{style}</style>
