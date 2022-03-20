@@ -6,6 +6,11 @@
     cursor: grab;
   }
 
+  img {
+    @apply absolute z-10 select-none;
+    touch-action: none;
+  }
+
   &__tip {
     @apply absolute text-white py-1 px-2 text-xs;
     @apply rounded-md opacity-80;
@@ -16,6 +21,10 @@
     &.tip2 {
       @apply left-10;
       bottom: 4.375rem;
+    }
+    &.tip3 {
+      @apply left-10;
+      bottom: 6.25rem;
     }
   }
   &__changeFlterLevel {

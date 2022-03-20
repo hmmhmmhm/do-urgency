@@ -21,6 +21,7 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
   const [filterInstance, setFilterInstance] = useState<ReturnType<
     typeof filter
   > | null>(null)
+  const [renderedUrl, setRenderedUrl] = useState(null as string | null)
 
   const [offset, setOffset] = useState({ x: 0, y: 0, zoom: 1 })
 
@@ -37,6 +38,11 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
       fragCode: getFragmentShaderCode({ samples })
     })
 
+    radialBlurFilter.ready = () => {
+      radialBlurFilter.uniform('2f', 'mouse', 0.5, 0.5).apply()
+      setRenderedUrl(radialBlurFilter.canvas.toDataURL())
+    }
+
     setFilterInstance(radialBlurFilter)
   }, [filterLevel])
 
@@ -49,6 +55,7 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
     const x = actualX / (canvas.width * offset.zoom)
     const y = actualY / (canvas.height * offset.zoom)
     filterInstance.uniform('2f', 'mouse', x, y).apply()
+    setRenderedUrl(canvas.toDataURL())
   }
 
   return (
@@ -63,6 +70,18 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
           }}
           onChangePosition={({ x, y, zoom }) => setOffset({ x, y, zoom })}
         >
+          {renderedUrl && (
+            <img
+              src={renderedUrl}
+              onClick={(event) => {
+                event.stopPropagation()
+                changeCenter(event)
+              }}
+              onDragStart={(event) => {
+                event.preventDefault()
+              }}
+            />
+          )}
           <canvas
             ref={canvasRef}
             onClick={(event) => {
@@ -77,6 +96,9 @@ const RadialBlurImageEdit = (props: IRadialBlurImageEditProps) => {
         </div>
         <div className="radialBlurImageEdit__tip tip2">
           <p>사진을 드래그해서 옮기고 확대할 수 있습니다.</p>
+        </div>
+        <div className="radialBlurImageEdit__tip tip3">
+          <p>모바일에선 사진을 꾹 눌러 이미지를 다운받을 수 있습니다.</p>
         </div>
         <button
           className="radialBlurImageEdit__changeFlterLevel"

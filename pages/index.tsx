@@ -8,12 +8,20 @@ import { useEffect, useState } from 'react'
 import JsFileDownloader from 'js-file-downloader'
 import { createFileInput } from 'utils/virtualFileInput'
 import style from './index.scss'
+import { preloadImage } from 'utils/prefetch'
+import isMobile from 'is-mobile'
 
 const Home: NextPage = () => {
   const [imageUrl, setImageUrl] = useState(null as string | null)
   const [fileInput, setFileInput] = useState(
     null as null | ReturnType<typeof initiateFileInput>
   )
+
+  const [isKakaoBrower, setKakaoBrower] = useState(false)
+  useEffect(() => {
+    const isKakao = navigator.userAgent.match('KAKAOTALK')
+    setKakaoBrower(Boolean(isKakao))
+  }, [])
 
   const initiateFileInput = () => {
     return createFileInput({
@@ -30,6 +38,15 @@ const Home: NextPage = () => {
       setImageUrl(files[0].thumbnail as string)
       fileInputInstance.reset()
     })
+  }, [])
+
+  useEffect(() => {
+    // Fixing iOS vh issues
+    const vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
+
+    // Fixing iOS prefetch image issue
+    preloadImage('https://i.imgur.com/FT8r0pM.png')
   }, [])
 
   return (
@@ -66,17 +83,33 @@ const Home: NextPage = () => {
           onClick={() => fileInput?.open()}
         />
 
-        <PrefetchLink href={'https://github.com/hmmhmmhm/do-urgency'} />
+        <PrefetchLink href="https://github.com/hmmhmmhm/do-urgency" />
         <InfoButton className="indexPage__infoButton" />
 
         {imageUrl && imageUrl.length > 0 && (
           <RadialBlurImageEdit
             className="indexPage__edit"
             imageUrl={imageUrl}
-            onDownload={(canvasElement) => {
-              new JsFileDownloader({
+            onDownload={async (canvasElement) => {
+              if (isKakaoBrower) {
+                alert(
+                  '카카오 인앱 브라우저에선 이미지를 꾹 눌러서 나오는 패널에서 다운로드 받아주세요.'
+                )
+                return
+              }
+
+              if (isMobile()) {
+                alert(
+                  '모바일 브라우저에선 이미지를 꾹 눌러서 나오는 패널에서 다운로드 받아야 사진첩에 보관이 가능합니다.'
+                )
+              }
+
+              await new JsFileDownloader({
                 url: canvasElement.toDataURL(),
-                filename: 'image.png'
+                filename: 'image.png',
+                forceDesktopMode: true,
+                nativeFallbackOnError: true,
+                contentType: 'image/png'
               })
             }}
             onClose={() => {

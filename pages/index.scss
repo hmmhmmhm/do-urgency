@@ -5,16 +5,20 @@ body,
 }
 
 .indexPage {
-  @apply bg-cover bg-center p-6;
+  @apply bg-cover bg-center p-6 overflow-hidden;
   width: 100vw;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background-color: #ebf1f5;
+  touch-action: none;
 
   &__infoButton {
     @apply absolute m-5 bottom-10 right-10 z-10;
   }
 
   &__edit {
-    @apply absolute z-20 top-0 left-0 w-full h-full;
+    @apply fixed z-20 top-0 left-0 overflow-hidden;
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    touch-action: none;
   }
 }
