@@ -22,12 +22,8 @@ const App = ({ Component, pageProps }: AppProps) => {
           content="initial-scale=1.0, minimal-ui, width=device-width, viewport-fit=cover"
         />
         <meta
-          name="google-site-verification"
-          content="Pmd9B_64uQhR_5t1rPgSs21xacfr7eLMvNyLh4VFWfw"
-        />
-        <meta
           name="naver-site-verification"
-          content="a60a640d59d8713e30173bff258fe71402f635dd"
+          content="880d54d70f5931580d52103c45da00329ee3d31b"
         />
       </Head>
 
